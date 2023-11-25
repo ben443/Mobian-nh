@@ -4,9 +4,21 @@
 architecture: {{ $architecture }}
 
 actions:
+  - action: download
+    url: https://salsa.debian.org/Mobian-team/devices/kernels/sunxi64-linux/-/jobs/4950914/artifacts/raw/debian/output/linux-image-6.6-sunxi64_6.6.1+sunxi64-1_arm64.deb
+    name: linux-image-arm64.deb
+    filename: linux-image-arm64.deb
   - action: apt
     recommends: false
     description: Install device-specific base packages
     packages:
-      - {{ $device }}-support
+      - eg25-manager
+      - firmware-ov5640
+      - firmware-realtek-rtl8723cs-bt
+      - ./linux-image-arm64.deb
+      - mobian-pinephone-tweaks
+      - mobian-tweaks-common
+      - mobile-usb-networking
+      - systemd-zram-generator
+      - u-boot-menu
       - rsync
