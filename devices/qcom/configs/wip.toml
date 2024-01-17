@@ -16,6 +16,11 @@ ramdisk = 0x0
 second = 0x0
 tags = 0x0
 pagesize = 0
+# OPTIONAL: uncomment if the device needs to use a v2 format bootimg, which
+# embeds a separate copy of the DTB (not relying on the one appended to the
+# kernel image)
+# version = 2
+# dtb = 0x0
 
 # Device-specific parameters: those are mostly used to identify the device, and
 # especially the device-tree file to use, which is constructed this way:
