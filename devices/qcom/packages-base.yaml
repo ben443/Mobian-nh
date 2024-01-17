@@ -14,6 +14,7 @@ actions:
     description: Install device-specific base packages
     packages:
       - yq
+      - mkbootimg
 {{- if ne $device "wip" }}
       - {{ $device }}-support
 {{- else }}
@@ -35,3 +36,8 @@ actions:
     source: droid-juicer
     destination: /usr/share/droid-juicer/configs
 {{- end }}
+
+  - action: run
+    chroot: true
+    description: Fix mkbootimg
+    command: sed -i -e '/from gki.generate_gki_certificate/d' /usr/bin/mkbootimg
