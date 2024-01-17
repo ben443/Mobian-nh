@@ -41,3 +41,5 @@ model = ""
 # variant = ""
 # OPTIONAL: uncomment if additional cmdline parameters are needed
 # append = ""
+# OPTIONAL: uncomment if device uses different bootimg parameters
+# bootimg = {version = 2, base = 0x0, kernel = 0x0, ramdisk = 0x0, dtb = 0x0, second = 0x0, tags = 0x0, pagesize = 4096 }
