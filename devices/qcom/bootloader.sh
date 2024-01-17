@@ -51,9 +51,10 @@ for i in $(seq 0 $(tomlq -r '.device | length - 1' ${CONFIG})); do
     cat /boot/vmlinuz-${KERNEL_VERSION} ${DTB_FILE} > /tmp/kernel-dtb
 
     # Create the bootimg as it's the only format recognized by the Android bootloader
-    abootimg --create /bootimg-${FULLMODEL} \
-        -c kerneladdr=${KERNEL_ADDR} -c ramdiskaddr=${RAMDISK_ADDR} \
-        -c secondaddr=${SECOND_ADDR} -c tagsaddr=${TAGS_ADDR} -c pagesize=${PAGE_SIZE} \
-        -c cmdline="mobile.root=${ROOTPART} ${CMDLINE} init=/sbin/init ro quiet splash" \
-        -k /tmp/kernel-dtb -r /boot/initrd.img-${KERNEL_VERSION}
+    mkbootimg -o /bootimg-${FULLMODEL} \
+        --kernel_offset ${KERNEL_ADDR} --kernel /tmp/kernel-dtb \
+        --ramdisk_offset ${RAMDISK_ADDR} --ramdisk /boot/initrd.img-${KERNEL_VERSION} \
+        --second_offset ${SECOND_ADDR} --tags_offset ${TAGS_ADDR} \
+        --cmdline "mobile.root=${ROOTPART} ${CMDLINE} init=/sbin/init ro quiet splash" \
+        --pagesize ${PAGE_SIZE}
 done
